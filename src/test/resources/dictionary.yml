@@ -1,0 +1,16 @@
+---
+M1:
+  JJ:
+    -1:
+      American:
+        - gp:
+            - o:
+                name: '?v1'
+                type: variable
+              p:
+                type: uri
+                uri: '<http://xmlns.com/foaf/0.1/name>'
+              s:
+                name: '?v0'
+                type: variable
+           
