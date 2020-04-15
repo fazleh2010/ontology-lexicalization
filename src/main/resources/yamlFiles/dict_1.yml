@@ -1,0 +1,45 @@
+---
+M1:
+  JJ:
+    5:
+      French:
+        - gp:
+            - o:
+                type: uri
+                uri: http://dbpedia.org/ontology/Person
+              p:
+                type: uri
+                uri: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+              s:
+                name: '?v0'
+                type: variable
+            - o:
+                type: uri
+                uri: http://dbpedia.org/ontology/France
+              p:
+                type: uri
+                uri: http://dbpedia.org/ontology/nationality
+              s:
+                name: '?v0'
+                type: variable
+          score: 0.2
+        - gp:
+            - o:
+                type: uri
+                uri: http://dbpedia.org/ontology/Settlement
+              p:
+                type: uri
+                uri: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+              s:
+                name: '?v0'
+                type: variable
+            - o:
+                type: uri
+                uri: http://dbpedia.org/ontology/France
+              p:
+                type: uri
+                uri: http://dbpedia.org/ontology/locatedIn
+              s:
+                name: '?v0'
+                type: variable
+          score: 0.7
