@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package citec.correlation.core.json;
+package citec.correlation.core;
 
 import citec.correlation.core.json.DataSet;
+import citec.correlation.core.json.DataSet;
 import citec.correlation.core.json.DataUnit;
-import static citec.correlation.core.Constants.UNICODE;
+import citec.correlation.core.json.DataUnit;
+import static citec.correlation.core.constants.Constants.UNICODE;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
@@ -22,20 +26,26 @@ import org.apache.commons.io.IOUtils;
  * @author elahi
  */
 public class JsonInput {
-
-    public static void main(String[] args) throws IOException, Exception {
-        String resourceDir = "src/main/resources/jsonFiles/";
-        String qaldFileName = resourceDir + "adjectiveAll-bafa.json";
-        JsonInput evaluation = new JsonInput();
-        evaluation.getInputTupplesFromJsonFile(qaldFileName);
+    private Map<String,DataUnit> qaldDataUnits=new HashMap<String,DataUnit>();
+    
+    public JsonInput(String qaldJsonFile) throws Exception{
+        getInputJson(qaldJsonFile);
     }
 
-    public void getInputTupplesFromJsonFile(String fileName) throws IOException, Exception {
-        InputStream inputStream = new FileInputStream(fileName);
+    public static void main(String[] args) throws IOException, Exception {
+        
+        //JsonInput evaluation = new JsonInput();
+        //evaluation.getInputJson(qaldFileName);
+    }
+
+    public void getInputJson(String qaldJsonFile) throws IOException, Exception {
+        InputStream inputStream = new FileInputStream(qaldJsonFile);
         List<DataUnit> dataUnits = parseJson(inputStream);
         for (DataUnit dataUnit : dataUnits) {
-            System.out.println("****************************************");
-            System.out.println("dataUnit:" + dataUnit);
+            //System.out.println("****************************************");
+            //System.out.println("dataUnit:" + dataUnit);
+            String adjective=dataUnit.getAdjectives().iterator().next();
+            qaldDataUnits.put(adjective, dataUnit);
         }
     }
 
@@ -52,6 +62,14 @@ public class JsonInput {
         }
 
         return dataSet.getQuestions();
+    }
+
+    public DataUnit getQaldDataUnits(String adjective) {
+        return qaldDataUnits.get(adjective);
+    }
+
+    public Map<String, DataUnit> getQaldDataUnits() {
+        return qaldDataUnits;
     }
 
 }

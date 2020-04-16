@@ -1,6 +1,6 @@
 
 import citec.correlation.core.json.DataUnit;
-import citec.correlation.core.json.JsonInput;
+import citec.correlation.core.JsonInput;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ public class JsonInputTest {
     @Test
     public void parseJson() throws IOException, Exception {
         InputStream inputStream = new FileInputStream(qaldJsonFile);
-        JsonInput jsonInput=new JsonInput();
+        JsonInput jsonInput=new JsonInput(qaldJsonFile);
         List<DataUnit> dataUnits = jsonInput.parseJson(inputStream);
         for (DataUnit dataUnit : dataUnits) {
             System.out.println(dataUnit);

@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package citec.correlation.core;
+
 import citec.correlation.core.yaml.TripleElement;
 import citec.correlation.core.yaml.KB_TYPE;
 import citec.correlation.core.yaml.ParseYaml;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -16,17 +19,18 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class YamlInput {
 
-    public static void main(String[] args) throws IOException  {
-        String dir = "src/main/resources/yamlFiles/";
-        String fileName = dir + "dictionary.yml";
-        YamlInput yamlWorking = new YamlInput();
-        //String yamlString = yamlWorking.getStringYmlData();
-        //System.out.println(yamlString);
-        ParseYaml parseYaml = new ParseYaml(fileName);
+    private Map<String, KB_TYPE> dictYaml = new HashMap<String, KB_TYPE>();
+
+    public YamlInput(String dictYamlFile) throws IOException {
+        this.getInputYaml(dictYamlFile);
+    }
+
+    public void getInputYaml(String dictYamlFile) throws IOException {
+        ParseYaml parseYaml = new ParseYaml(dictYamlFile);
         for (String key : parseYaml.getTypeGpls().keySet()) {
-            System.out.println(key);
+            //System.out.println(key);
             KB_TYPE kb_type = parseYaml.getTypeGpls().get(key);
-            kb_type.display();
+            dictYaml.put(key, kb_type);
         }
 
         //yamlWithStringAndClass( dir + "customer_with_type.yaml");
@@ -51,5 +55,9 @@ public class YamlInput {
         return "name: Joe\n"
                 + "phone: 111-111-1111\n"
                 + "address: Park Dr, Charlie Hill";
+    }
+
+    public Map<String, KB_TYPE> getDictYaml() {
+        return dictYaml;
     }
 }
